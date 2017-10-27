@@ -1,10 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Fish_Behavior.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Food_Spawner.cs">
     <Files>
-      <File FileName="Assets\Scripts\Fish_Behavior.cs" Line="111" Column="60" />
-      <File FileName="Assets\Scripts\Wall_Behavior.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shark_Behavior.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Fish_Behavior.cs" Line="134" Column="41" />
+      <File FileName="Assets\Scripts\Wall_Behavior.cs" Line="8" Column="3" />
+      <File FileName="Assets\Scripts\Shark_Behavior.cs" Line="103" Column="4" />
+      <File FileName="Assets\Scripts\Food_Behavior.cs" Line="27" Column="76" />
+      <File FileName="Assets\Scripts\Food_Spawner.cs" Line="27" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

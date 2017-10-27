@@ -119,12 +119,16 @@ MonoBehaviour:
   separation_weight: 4
   alignment_weight: 2
   shark_weight: 10
+  food_weight: 5
   separation_distance: 4
   wall_distance: 4
   spawn_sphere_rad: 30
   dir: {x: 0, y: 0, z: 0}
+  soft_max_distance: 75
+  soft_boundary_weight: 1
   k_fish: 20
   k_shark: 1
+  k_food: 1
 --- !u!135 &135907414621976268
 SphereCollider:
   m_ObjectHideFlags: 1

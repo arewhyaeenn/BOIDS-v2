@@ -111,8 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9150965a85ef19147ad1f058c11aaa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.001
+  speed: 0.3
   spawn_rad: 49
+  chaos: 0.5
+  soft_max_distance: 75
+  soft_boundary_weight: 1
   dir: {x: 0, y: 0, z: 0}
 --- !u!135 &135859398784960462
 SphereCollider:
@@ -124,5 +127,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
