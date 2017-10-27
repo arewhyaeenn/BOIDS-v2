@@ -23,6 +23,8 @@ public class Shark_Behavior : MonoBehaviour {
 	// spawn location max distance from origin, direction
 	public float spawn_sphere_rad;
 	public Vector3 dir;
+	public float soft_max_distance;
+	public float soft_boundary_weight;
 
 	// number of fish to consider
 	public int k_fish;
@@ -33,6 +35,7 @@ public class Shark_Behavior : MonoBehaviour {
 		weight.Add ("Wall", wall_weight);
 		weight.Add ("Separation", separation_weight);
 		weight.Add ("Fish", fish_weight);
+		weight.Add ("Soft", soft_boundary_weight);
 
 		dir = UnityEngine.Random.onUnitSphere;
 		transform.position = UnityEngine.Random.onUnitSphere * spawn_sphere_rad;
@@ -92,6 +95,13 @@ public class Shark_Behavior : MonoBehaviour {
 			weight ["Fish"] * fish_vector +
 			weight ["Wall"] * wall_vector +
 			UnityEngine.Random.onUnitSphere * chaos);
+
+		float from_origin = transform.position.magnitude;
+		if (from_origin > soft_max_distance) {
+			Vector3	other = transform.position.normalized;
+			desired -= weight ["Soft"] * (from_origin - soft_max_distance) * other;
+		}
+
 		desired.Normalize();
 
 		dir = rotateToward (dir, desired, max_rad);

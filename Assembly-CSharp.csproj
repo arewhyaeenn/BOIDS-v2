@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Fish_Behavior.cs" />
+     <Compile Include="Assets\Scripts\Food_Behavior.cs" />
+     <Compile Include="Assets\Scripts\Food_Spawner.cs" />
      <Compile Include="Assets\Scripts\Shark_Behavior.cs" />
      <Compile Include="Assets\Scripts\Wall_Behavior.cs" />
  <Reference Include="UnityEngine.UI">

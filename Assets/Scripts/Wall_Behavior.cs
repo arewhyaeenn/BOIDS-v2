@@ -6,8 +6,6 @@ public class Wall_Behavior : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other)
 	{
-		other.gameObject.SetActive (false);
-		Debug.Log ("entered wall");
 		switch (other.gameObject.tag) {
 
 		case "Fish":
@@ -18,6 +16,10 @@ public class Wall_Behavior : MonoBehaviour {
 		case "Shark":
 			other.gameObject.SetActive (false);
 			Debug.Log ("shark entered wall");
+			break;
+		
+		case "Food":
+			other.gameObject.GetComponent<Food_Behavior> ().dir = -other.gameObject.transform.position;
 			break;
 
 		default:

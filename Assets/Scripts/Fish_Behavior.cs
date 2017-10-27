@@ -16,17 +16,21 @@ public class Fish_Behavior : MonoBehaviour {
 	public float separation_weight;
 	public float alignment_weight;
 	public float shark_weight;
+	public float food_weight;
 	public float separation_distance;
 	public float wall_distance;
 	private Dictionary<string, float> weight;
 
-	// spawn location max distance from origin, direction
+	// spawn location max distance from origin, direction, soft max distance from origin
 	public float spawn_sphere_rad;
 	public Vector3 dir;
+	public float soft_max_distance;
+	public float soft_boundary_weight;
 
 	// number of nearest neighbors
 	public int k_fish;
 	public int k_shark;
+	public int k_food;
 
 
 	void Start () {
@@ -37,6 +41,8 @@ public class Fish_Behavior : MonoBehaviour {
 		weight.Add ("Alignment", alignment_weight);
 		weight.Add ("Separation", separation_weight);
 		weight.Add ("Shark", shark_weight);
+		weight.Add ("Food", food_weight);
+		weight.Add ("Soft", soft_boundary_weight);
 
 		dir = UnityEngine.Random.onUnitSphere;
 		transform.position = UnityEngine.Random.insideUnitSphere * spawn_sphere_rad;
@@ -81,6 +87,19 @@ public class Fish_Behavior : MonoBehaviour {
 			i++;
 		}
 
+		// nearby food (layer 11)
+		Vector3 food_vector = Vector3.zero;
+		Collider[] food = neighborsByDistance (11, view_rad);
+		i = 0;
+		I = Math.Min (k_food, food.Length);
+		while (i < I) {
+			Vector3 other = food [i].transform.position - transform.position;
+			float distance = other.magnitude;
+			other.Normalize ();
+			food_vector += (view_rad - distance) * other;
+			i++;
+		}
+
 		// nearby walls (layer 8)
 		Vector3 wall_vector = Vector3.zero;
 		Collider[] walls = Physics.OverlapSphere (transform.position, wall_distance, 1 << 8); // 8 is wall layer...
@@ -92,27 +111,35 @@ public class Fish_Behavior : MonoBehaviour {
 			wall_vector += (wall_distance - distance) * other;
 			i++;
 		}
+		if (walls.Length > 0 && wall_vector.magnitude == 0) {
+			Debug.Log ("uh oh");
+		}
 
 		cohesion_vector.Normalize ();
 		separation_vector.Normalize ();
 		alignment_vector.Normalize ();
 		wall_vector.Normalize ();
 		shark_vector.Normalize ();
+		food_vector.Normalize ();
 
 		dir = (dir + weight ["Cohesion"] * cohesion_vector +
 			weight ["Separation"] * separation_vector +
 			weight ["Alignment"] * alignment_vector +
 			weight ["Wall"] * wall_vector +
 			weight["Shark"] * shark_vector +
+			weight["Food"] * food_vector +
 			UnityEngine.Random.onUnitSphere * chaos);
+		
+		float from_origin = transform.position.magnitude;
+		if (from_origin > soft_max_distance) {
+			Vector3	other = transform.position.normalized;
+			dir -= weight ["Soft"] * (from_origin - soft_max_distance) * other;
+		}
+
 		dir.Normalize();
 		transform.position += speed * dir;
-
-		Collider[] debugging = neighborsByDistance (10, (float) 1);
-		if (debugging.Length > 1) {
-			Debug.Log (debugging.Length);
-		}
 	}
+
 
 	Collider[] neighborsByDistance (int layer, float rad) // up to k nearest neighbors in specified layer (8:wall, 9:fish, ...) within rad distance
 	{
@@ -127,5 +154,20 @@ public class Fish_Behavior : MonoBehaviour {
 		}
 		Array.Sort (distances, neighbors);
 		return neighbors;
+	}
+
+
+	void OnTriggerEnter (Collider other)
+	{
+		switch (other.gameObject.tag) {
+
+		case "Food":
+			Destroy (other.gameObject);
+			//Debug.Log ("Food eaten");
+			break;
+
+		default:
+			break;
+		}
 	}
 }
