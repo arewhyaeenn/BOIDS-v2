@@ -17,6 +17,7 @@ Implemented so far:
 		cube around origin, death if touched
 
 To do:
+
 	Resource generation / seeking for fish
 	Starvation mechanics for fish / sharks
 	Perpendicular shark-avoidance for fish
