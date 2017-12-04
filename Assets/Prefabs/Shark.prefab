@@ -114,17 +114,21 @@ MonoBehaviour:
   view_rad: 30
   speed: 3
   chaos: 0.2
-  max_degrees: 20
+  max_turn_degrees: 20
+  reproduction_threshold: 1000
+  max_hp: 2500
+  hp_lost_per_frame: 3
+  collision_penalty: 500
+  size: 4
   wall_weight: 20
   separation_weight: 4
   fish_weight: 2
   wall_distance: 20
-  separation_distance: 10
-  spawn_sphere_rad: 40
+  separation_distance: 15
   dir: {x: 0, y: 0, z: 0}
-  soft_max_distance: 75
+  soft_max_distance: 100
   soft_boundary_weight: 10
-  k_fish: 40
+  k_fish: 5
 --- !u!135 &135362243519303850
 SphereCollider:
   m_ObjectHideFlags: 1

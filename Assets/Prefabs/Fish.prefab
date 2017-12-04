@@ -111,22 +111,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1327c212a2bbe44b440cbb262ef924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view_rad: 20
+  view_rad: 30
+  max_turn_degrees: 40
   speed: 2
-  chaos: 0.2
+  chaos: 0.05
+  reproduction_threshold: 250
+  max_hp: 500
+  hp_lost_per_frame: 1
+  hp_gained_for_eating: 125
   wall_weight: 20
   cohesion_weight: 2
   separation_weight: 4
   alignment_weight: 2
   shark_weight: 10
   food_weight: 5
-  separation_distance: 4
+  dodge_weight: 10
+  separation_distance: 10
   wall_distance: 4
-  spawn_sphere_rad: 30
+  collision_penalty: 20
   dir: {x: 0, y: 0, z: 0}
   soft_max_distance: 75
   soft_boundary_weight: 1
-  k_fish: 20
+  k_fish: 35
   k_shark: 1
   k_food: 1
 --- !u!135 &135907414621976268
